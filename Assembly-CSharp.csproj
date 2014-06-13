@@ -50,9 +50,9 @@
      <Compile Include="Assets\Scripts\DestroyAfterSeconds.cs" />
      <Compile Include="Assets\Scripts\Destroyer.cs" />
      <Compile Include="Assets\Scripts\Health.cs" />
+     <Compile Include="Assets\Scripts\Mine.cs" />
      <Compile Include="Assets\Scripts\MinionRun.cs" />
      <Compile Include="Assets\Scripts\NetworkManager.cs" />
-     <Compile Include="Assets\Scripts\PlayerAnimationStates.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

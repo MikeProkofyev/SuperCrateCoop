@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour {
 
 	public float maxSpeed  = 10f;
 	public float jumpForce = 700;
+	public float throwForce = 50f;
 	public bool facingLeft = true;
 	public Transform groundCheck;
 	public LayerMask whatIsGround;
@@ -13,8 +14,10 @@ public class PlayerController : MonoBehaviour {
 	public GameObject bulletPrefab;
 	public Transform bulletSpawnPoint;
 	public float fireRate = 10f;
+	public float mineThrowingRate = 600f;
 
 	float lastFireTime = -1f;
+	float lastMineThrowTime = -1f;
 	bool grounded = false;
 	float groundRadius = 0.2f;
 	float move = 0;
@@ -54,14 +57,20 @@ public class PlayerController : MonoBehaviour {
 			}
 		} else if (anim.GetBool("Shooting") && networkView.isMine) {
 			networkView.RPC("StopShooting", RPCMode.All);
-		} else if (Input.GetButton("Fire2") && anim.GetBool("Ground") && move == 0 && networkView.isMine) {
-			networkView.RPC("ThrowMine", RPCMode.All);
+		} else if (Input.GetButtonDown("Fire2") && anim.GetBool("Ground") && move == 0 && networkView.isMine) {
+			if (Time.time > lastMineThrowTime + 1 / mineThrowingRate){ 
+				networkView.RPC("ThrowMine", RPCMode.All);
+				lastMineThrowTime = Time.time;
+			}
+		}else if (anim.GetBool("ThrowingMine") && networkView.isMine && (Time.time < lastMineThrowTime + 1 / mineThrowingRate)) {
+//			networkView.RPC("StopThrowingMines", RPCMode.All);
 		}
 	}
 
 	[RPC]
 	void Shoot () {
-		anim.SetBool("Shooting", true);
+		if(!anim.GetBool("Shooting"))
+			anim.SetBool("Shooting", true);
 		GameObject bullet = Network.Instantiate (bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation, 1) as GameObject;
 		Vector3 bulletScale = bullet.transform.localScale;
 		if (!facingLeft) {
@@ -73,7 +82,15 @@ public class PlayerController : MonoBehaviour {
 
 	[RPC]
 	void ThrowMine() {
+		anim.SetBool("ThrowingMine", true);
 		GameObject mine = Network.Instantiate (minePrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation, 1) as GameObject;
+		int multiplier = facingLeft ? -1 : 1;
+		mine.rigidbody2D.AddForce (new Vector2 (multiplier * throwForce, 50)); 
+	}
+
+	[RPC]
+	void StopThrowingMines() {
+		anim.SetBool("ThrowingMine", false);
 	}
 
 	[RPC]
