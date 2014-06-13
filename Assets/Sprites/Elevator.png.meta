@@ -1,0 +1,121 @@
+fileFormatVersion: 2
+guid: 0027ccb54166a4a9cac7bd2a322fc27b
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -2
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 25
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: iPhone
+    maxTextureSize: 1024
+    textureFormat: -2
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: Elevator_0
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 202
+        width: 200
+        height: 89
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Elevator_1
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 359
+        width: 304
+        height: 1102
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Elevator_2
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 316
+        width: 304
+        height: 1136
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Elevator_3
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 3
+        width: 25
+        height: 89
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Elevator_4
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 0
+        width: 25
+        height: 91
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Elevator_5
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 271
+        width: 304
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Elevator_6
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 337
+        width: 49
+        height: 39
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Elevator_7
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 911
+        width: 304
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+  spritePackingTag: 
+  userData: 
