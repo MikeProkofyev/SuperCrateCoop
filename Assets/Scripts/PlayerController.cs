@@ -62,15 +62,16 @@ public class PlayerController : MonoBehaviour {
 				networkView.RPC("ThrowMine", RPCMode.All);
 				lastMineThrowTime = Time.time;
 			}
-		}else if (anim.GetBool("ThrowingMine") && networkView.isMine && (Time.time < lastMineThrowTime + 1 / mineThrowingRate)) {
-//			networkView.RPC("StopThrowingMines", RPCMode.All);
+		}else if (anim.GetBool("ThrowingMine") && networkView.isMine && (Time.time > lastMineThrowTime + mineThrowingRate)) {
+			networkView.RPC("StopThrowingMines", RPCMode.All);
 		}
 	}
 
 	[RPC]
 	void Shoot () {
-		if(!anim.GetBool("Shooting"))
+		if(!anim.GetBool("Shooting")) {
 			anim.SetBool("Shooting", true);
+		}
 		GameObject bullet = Network.Instantiate (bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation, 1) as GameObject;
 		Vector3 bulletScale = bullet.transform.localScale;
 		if (!facingLeft) {
@@ -82,7 +83,8 @@ public class PlayerController : MonoBehaviour {
 
 	[RPC]
 	void ThrowMine() {
-		anim.SetBool("ThrowingMine", true);
+		if(!anim.GetBool("ThrowingMine"))
+			anim.SetBool("ThrowingMine", true);
 		GameObject mine = Network.Instantiate (minePrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation, 1) as GameObject;
 		int multiplier = facingLeft ? -1 : 1;
 		mine.rigidbody2D.AddForce (new Vector2 (multiplier * throwForce, 50)); 
