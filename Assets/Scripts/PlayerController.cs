@@ -72,7 +72,8 @@ public class PlayerController : MonoBehaviour {
 		if(!anim.GetBool("Shooting")) {
 			anim.SetBool("Shooting", true);
 		}
-		GameObject bullet = Network.Instantiate (bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation, 1) as GameObject;
+		Vector3 newBulletSpawnPosition = new Vector3 (bulletSpawnPoint.position.x, bulletSpawnPoint.position.y + Random.Range (-0.25F, 0.25F));
+		GameObject bullet = Network.Instantiate (bulletPrefab, newBulletSpawnPosition, bulletSpawnPoint.rotation, 1) as GameObject;
 		Vector3 bulletScale = bullet.transform.localScale;
 		if (!facingLeft) {
 			bullet.GetComponent<Bullet> ().shootingtLeft = false;
@@ -85,14 +86,20 @@ public class PlayerController : MonoBehaviour {
 	void ThrowMine() {
 		if(!anim.GetBool("ThrowingMine"))
 			anim.SetBool("ThrowingMine", true);
+		StartCoroutine(WaitForSeconds());
 		GameObject mine = Network.Instantiate (minePrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation, 1) as GameObject;
 		int multiplier = facingLeft ? -1 : 1;
-		mine.rigidbody2D.AddForce (new Vector2 (multiplier * throwForce, 50)); 
+		mine.rigidbody2D.AddForce (new Vector2 (multiplier * throwForce, 350)); 
 	}
+	
 
 	[RPC]
 	void StopThrowingMines() {
 		anim.SetBool("ThrowingMine", false);
+	}
+
+	IEnumerator WaitForSeconds() {
+		yield return new WaitForSeconds(5);
 	}
 
 	[RPC]
