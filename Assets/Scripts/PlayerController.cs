@@ -86,21 +86,24 @@ public class PlayerController : MonoBehaviour {
 	void ThrowMine() {
 		if(!anim.GetBool("ThrowingMine"))
 			anim.SetBool("ThrowingMine", true);
-		StartCoroutine(WaitForSeconds());
+
+		Invoke("CreateMine", 0.5f);
+	}
+
+	
+
+	[RPC]
+	void CreateMine() {
 		GameObject mine = Network.Instantiate (minePrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation, 1) as GameObject;
 		int multiplier = facingLeft ? -1 : 1;
 		mine.rigidbody2D.AddForce (new Vector2 (multiplier * throwForce, 350)); 
 	}
-	
 
 	[RPC]
 	void StopThrowingMines() {
 		anim.SetBool("ThrowingMine", false);
 	}
 
-	IEnumerator WaitForSeconds() {
-		yield return new WaitForSeconds(5);
-	}
 
 	[RPC]
 	void StopShooting() {
