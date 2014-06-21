@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour {
 
 	public float maxSpeed  = 10f;
 	public float jumpForce = 700;
-	public float throwForce = 50f;
+	public float throwForce = 0.1f;
 	public bool facingLeft = true;
 	public Transform groundCheck;
 	public LayerMask whatIsGround;
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour {
 
 	[RPC]
 	void CreateMine() {
-		GameObject mine = Network.Instantiate (minePrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation, 1) as GameObject;
+		GameObject mine = Instantiate (minePrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation) as GameObject;
 		int multiplier = facingLeft ? -1 : 1;
 		mine.rigidbody2D.AddForce (new Vector2 (multiplier * throwForce, 350)); 
 	}

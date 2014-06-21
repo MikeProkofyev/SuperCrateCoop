@@ -66,7 +66,6 @@ public class NetworkManager : MonoBehaviour {
 		spawnPlayer();
 		if (Network.isServer && spawnWaves) {
 			networkView.RPC("UpdateScore", RPCMode.All, 0);
-//			UpdateScore (0);
 			StartCoroutine (SpawnWaves ());
 		}
 	}
@@ -74,7 +73,6 @@ public class NetworkManager : MonoBehaviour {
 	void OnConnectedToServer() {
 		spawnPlayer();
 		networkView.RPC("UpdateScore", RPCMode.All, 0);
-//		UpdateScore (0);
 	}
 
 	void OnMasterServerEvent(MasterServerEvent msEvent) {
@@ -84,7 +82,6 @@ public class NetworkManager : MonoBehaviour {
 
 	[RPC]
 	void StartSpawnWaves(){
-			print ("Starting spawning");
 			StartCoroutine (SpawnWaves ());
 
 	}

@@ -5,6 +5,7 @@ public class Mine : MonoBehaviour {
 
 	public Transform groundCheck;
 	public LayerMask whatIsGround;
+	public GameObject explosion;
 
 
 	Animator anim;
@@ -32,12 +33,11 @@ public class Mine : MonoBehaviour {
 			switch (other.gameObject.tag) {
 			case "Minion":
 				networkView.RPC ("Explode", RPCMode.All);
+				Network.Instantiate(explosion, transform.position, transform.rotation, 1);
 				break;
 			case "Player":
 				networkView.RPC ("Explode", RPCMode.All);
-				break;
-			case "Mine":
-				networkView.RPC ("Explode", RPCMode.All);
+				Network.Instantiate(explosion, transform.position, transform.rotation, 1);
 				break;
 			case "Bullet":
 				networkView.RPC ("Explode", RPCMode.All);
